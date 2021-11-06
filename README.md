@@ -74,3 +74,8 @@
 
 
 
+## 自动反和谐
+
+AzurLaneUncensored 已作为一个小工具添加至碧蓝航线脚本 [Alas](https://github.com/LmeSzinc/AzurLaneAutoScript) 。点击启动后，自动执行下载反和谐文件，将文件推送至模拟器内，重启游戏客户端。
+
+![2021-11-04_17-31-22_tv1XLujaaT_1600_1100](README.assets/AlasTool.png)
