@@ -55,13 +55,13 @@
 2. Clone 本项目
 
    ```
-   git clone https://github.com/LmeSzinc/AzurLaneUncensored
+   git clone https://github.com/LmeSzinc/AzurLaneUncensored.git
    ```
 
    这将下载超过 70MB 的文件，如果你访问 Github 确有困难，可以使用 [码云镜像](https://gitee.com/LmeSzinc/AzurLaneUncensored)
 
    ```
-   git clone https://github.com/LmeSzinc/AzurLaneUncensored
+   git clone https://gitee.com/lmeszinc/AzurLaneUncensored.git
    ```
 
 3. 在本项目根目录下，使用 ADB 命令推送文件，这里以模拟器的路径为例，命令将在 2-3 秒内执行完毕。
