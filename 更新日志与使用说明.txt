@@ -22,6 +22,20 @@
 更改客户端可能有封号风险 出现任何封号 请自行承担责任 
 
 更新日志：
+23年6月29日已确认sd小人文件替换会导致队伍无法正常过图的问题，如有该问题请删除char文件夹下的以下补丁文件
+char/ailunsamuna_2
+char/buleisite
+char/changbo_3
+char/huangjiafangzhou_g
+char/huangjiafangzhou_h
+char/ougen_2
+char/shengnvzhende_2
+char/tianying
+char/yingwuluo
+char/zhala_2
+23年6月1日优化文件大小。
+23年5月23日新增布吕歇尔皮肤-「急转直下的Fallinlove」立绘废案。
+23年4月1日新增誓约之戒、比翼双飞图标废案。
 23年2月28日新增圣女贞德皮肤-「海之圣女」、扎拉皮肤-「泳池边的“偶遇”」、皇家方舟婚纱-「纯白的守护者」、皇家方舟改sd小人废案。
 22年12月29日新增伊吹皮肤-「恬静无为」立绘废案。
 22年10月1日新增布雷斯特sd小人废案。
