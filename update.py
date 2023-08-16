@@ -20,8 +20,8 @@ def update():
     with zipfile.ZipFile(f'./tmp/uncensored.plus.{res}.zip', 'r') as zf:
         zf.extractall('./tmp/')
     shutil.copytree('./tmp/files', './files')
-    if os.path.exists('./files/char'):
-        shutil.rmtree('./files/char')
+    if os.path.exists('./files/AssetBundles/char'):
+        shutil.rmtree('./files/AssetBundles/char')
 
     shutil.rmtree('./tmp')
 
