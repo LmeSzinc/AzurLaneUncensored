@@ -3,9 +3,9 @@ import requests, requests_cache
 import shutil
 
 def update():
-    if os.path.exists('./files'):
+    if os.path.isdir('./files'):
         shutil.rmtree('./files')
-    if not os.path.exists('./tmp'):
+    if not os.path.isdir('./tmp'):
         os.mkdir('./tmp')
     res = []
     session = requests_cache.CachedSession(cache_control=True, backend='memory')
@@ -20,7 +20,7 @@ def update():
     with zipfile.ZipFile(f'./tmp/uncensored.plus.{res}.zip', 'r') as zf:
         zf.extractall('./tmp/')
     shutil.copytree('./tmp/files', './files')
-    if os.path.exists('./files/AssetBundles/char'):
+    if os.path.isdir('./files/AssetBundles/char'):
         shutil.rmtree('./files/AssetBundles/char')
 
     shutil.rmtree('./tmp')
