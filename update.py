@@ -3,9 +3,7 @@ import requests, requests_cache
 import shutil
 
 def update():
-    if os.path.isdir('./files'):
-        shutil.rmtree('./files')
-    if not os.path.isdir('./tmp'):
+    if not os.path.exists('./tmp'):
         os.mkdir('./tmp')
     res = []
     session = requests_cache.CachedSession(cache_control=True, backend='memory')
@@ -16,11 +14,14 @@ def update():
     res = res[0]
     assets =  requests.get(f'https://github.com/taofan233/azurlane_uncensored/releases/download/{res}/uncensored.plus.{res}.zip')
     open(f"./tmp/uncensored.plus.{res}.zip", "wb+").write(assets.content)
-    import zipfile
-    with zipfile.ZipFile(f'./tmp/uncensored.plus.{res}.zip', 'r') as zf:
-        zf.extractall('./tmp/')
-    shutil.copytree('./tmp/files', './files')
-    if os.path.isdir('./files/AssetBundles/char'):
+    if os.path.exists(f'./tmp/uncensored.plus.{res}.zip'):
+        import zipfile
+        with zipfile.ZipFile(f'./tmp/uncensored.plus.{res}.zip', 'r') as zf:
+            zf.extractall('./tmp/')
+    if os.path.exists('./tmp/files') and os.path.exists('./files'):
+        shutil.rmtree('./files')
+        shutil.copytree('./tmp/files', './files')
+    if os.path.exists('./files/AssetBundles/char'):
         shutil.rmtree('./files/AssetBundles/char')
 
     shutil.rmtree('./tmp')
