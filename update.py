@@ -1,30 +1,35 @@
-import os
-import requests, requests_cache
 import shutil
+import tempfile
+from pathlib import Path
+
+import patoolib
+import requests_cache
+
 
 def update():
-    if not os.path.exists('./tmp'):
-        os.mkdir('./tmp')
-    res = []
-    session = requests_cache.CachedSession(cache_control=True, backend='memory')
-    data = session.get('https://api.github.com/repos/taofan233/azurlane_uncensored/releases').json()
-    for item in data:
-        if item['author']['login'] == 'taofan233':
-            res.append(item['tag_name'])
-    res = res[0]
-    assets =  requests.get(f'https://github.com/taofan233/azurlane_uncensored/releases/download/{res}/uncensored.plus.{res}.zip')
-    open(f"./tmp/uncensored.plus.{res}.zip", "wb+").write(assets.content)
-    if os.path.exists(f'./tmp/uncensored.plus.{res}.zip'):
-        import zipfile
-        with zipfile.ZipFile(f'./tmp/uncensored.plus.{res}.zip', 'r') as zf:
-            zf.extractall('./tmp/')
-    if os.path.exists('./tmp/files') and os.path.exists('./files'):
-        shutil.rmtree('./files')
-        shutil.copytree('./tmp/files', './files')
-    if os.path.exists('./files/AssetBundles/char'):
-        shutil.rmtree('./files/AssetBundles/char')
+    session = requests_cache.CachedSession(
+        cache_control=True, backend='memory')
+    data = session.get(
+        'https://api.github.com/repos/taofan233/azurlane_uncensored/releases/latest').json()
+    assert data['author']['login'] == 'taofan233', 'Wrong author'
+    tag_name = data['tag_name']
+    latest_asset = next(asset for asset in data['assets']
+                        if asset['name'].startswith(f'uncensored.plus.{tag_name}'))
+    tmp_dir = Path(tempfile.mkdtemp())
+    asset_file = tmp_dir / latest_asset['name']
+    asset_file.write_bytes(session.get(
+        latest_asset['browser_download_url']).content)
+    patoolib.extract_archive(str(asset_file), outdir=str(tmp_dir))
+    latest_files = tmp_dir / 'files'
+    local_files = Path('./files').resolve()
+    if latest_files.exists() and local_files.exists():
+        shutil.rmtree(local_files)
+        shutil.copytree(latest_files, local_files)
+    char_files = local_files / 'AssetBundles' / 'char'
+    if char_files.exists():
+        shutil.rmtree(char_files)
+    shutil.rmtree(tmp_dir)
 
-    shutil.rmtree('./tmp')
 
 if __name__ == '__main__':
     update()
