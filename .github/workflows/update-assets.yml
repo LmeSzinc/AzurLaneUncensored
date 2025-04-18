@@ -22,7 +22,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          sudo apt-get install unrar
+          sudo apt-get install p7zip-full
       - name: Update Assets
         run: |
           python update.py

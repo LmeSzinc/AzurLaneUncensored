@@ -20,7 +20,7 @@ def update():
     asset_file.write_bytes(session.get(
         latest_asset['browser_download_url']).content)
     patoolib.extract_archive(str(asset_file), outdir=str(tmp_dir))
-    latest_files = tmp_dir / 'files'
+    latest_files = next((p for p in tmp_dir.rglob('files') if p.is_dir()), None)
     local_files = Path('./files').resolve()
     if latest_files.exists() and local_files.exists():
         shutil.rmtree(local_files)
